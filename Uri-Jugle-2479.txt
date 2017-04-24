@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct nomes
+{
+  char *nome;
+  char ca;
+  
+};
+typedef struct  nomes Nomes;
+int main()
+{  
+    Nomes *vn;//vetor Guarda os nomes
+    int max,i,j;
+    int cop=0,ncop=0;
+    Nomes *aux;
+    Nomes *vc;
+  
+
+
+//PEDINDO O TAMANHO DO MEU VETOR  
+    //printf("ENTRE COM O TOTAL DE NOMES QUE DESEJA INSERIR \n");
+    scanf("%d",&max);
+
+//INFORMANDO O TAMANHO DO VETOR
+   // printf("TOTAL DE NOMES PARA INSERIR %d \n",max);
+
+//FAZENDO ALOCAÇÃO DIMANICA DO MEU VETOR
+   vn=(Nomes *)malloc(max * sizeof(Nomes));
+   if(vn==NULL)
+      return(2);
+
+   vc=(Nomes *)malloc(max * sizeof(Nomes));
+   if(vc==NULL)
+      return(2);
+  
+    __fpurge(stdin); // LIMPANDO LIXO DO TECLADO
+
+
+
+   aux=(Nomes *)malloc(max * sizeof(Nomes));
+   if(vc==NULL)
+      return(2);
+
+
+//GUARDANDO OS NOMES QUE O USUARIO ENTROU  
+  for(i=0;i<max;i++)
+  { 
+   
+//Guardando 20 posições para cada string  
+     vn[i].nome=(char *)malloc(20);
+     if(vn[i].nome==NULL)
+        return(4); 
+
+    
+     scanf("%c %s",&vc[i].ca,vn[i].nome);// PEGA O SINAL + MAIS O NOME
+     __fpurge(stdin);    
+         
+  }
+ 
+//mostra caracter
+  for(i=0;i<max;i++)
+  {    
+      if(vc[i].ca == '+') 
+       {  
+         cop ++;
+       } 
+  
+          
+
+//TESTE PARA PEGAS AS CRIANÇAS QUE NÃO COMPORTARAM
+       else if(vc[i].ca == '-') 	
+            {  
+             ncop ++;
+            }
+ 
+  } 
+ // printf("TOTAL DE CRIANÇAS %d COMPORTARAM %d QUE NÃO SE COMPORTARAM  \n",cop,ncop) ;
+  
+//teste para ordenar  em ordem alfabetica
+     for(i=0;i<max;i++)
+      {  
+          for(j=0;j<max;j++)
+           {   
+
+              if(strcmp(vn[i].nome,vn[j].nome)<0) 	
+               { 
+                 strcpy(aux,vn[i].nome);
+                 strcpy(vn[i].nome,vn[j].nome);
+                 strcpy(vn[j].nome,aux); 
+                                   
+                 }
+
+           }
+     }
+ 
+ 
+//MOSTRANDO JA ORNDENADO
+     for(i=0;i<max;i++)
+      {  
+        printf("%s\n",vn[i].nome); 
+      }
+  
+ printf("Se comportaram: %d | Nao se comportaram: %d \n",cop,ncop) ;
+
+  return(0);
+}
